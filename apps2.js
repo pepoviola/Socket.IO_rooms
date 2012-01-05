@@ -29,13 +29,17 @@ app.get('/', function (req, res) {
  * 
  * */
 
-var tracked = [];
+var words = [];
 var Track = function(word,room){
-        this.word = word,
-        this.RoomsInstance = room
-        tracked.push(this);
-        }
-        
+	/*have to check if the word is already tracked*/
+	var toTrack = new Object();
+	toTrack.word = word;
+	toTrack.rooms = [];
+	toTrack.rooms.push(room);
+	words[""+toTrack.word] = toTrack.rooms;
+	return toTrack;
+	}
+	
         
  
 var buffer = [];

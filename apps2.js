@@ -31,16 +31,67 @@ app.get('/', function (req, res) {
 
 var words = [];
 var Track = function(word,room){
-	/*have to check if the word is already tracked*/
+	/*
+    * have to check if the word is already tracked
+    * if the word is not in words add to
+    * if the word is in words, and the room is not set
+    * add the room to the word
+    */
 	var toTrack = new Object();
 	toTrack.word = word;
-	toTrack.rooms = [];
-	toTrack.rooms.push(room);
-	words[""+toTrack.word] = toTrack.rooms;
+    toTrack.room = room;
+	//toTrack.rooms = [];
+    //toTrack.rooms.push(room);
+    /*check if word is in words*/
+    for(var i = 0; i < words.length;i++){
+        for(var keyword in words[i]){
+            if(keyword==toTrack.word){
+                words[keyword].push(toTrack.room);
+                }            
+            }    
+    }
+    //words is not in words...
+    //words.push({toTrack.word:[toTrack.room]});	
 	return toTrack;
 	}
 	
-        
+/**
+ * Filter manager
+ * =============
+ * 
+ * Get the tweets and filter for looking for the keyword
+ * Then send the tweet to the rooms
+ * 
+ * */
+   
+
+function inspectTweet(tweet){
+    
+    for(var i = 0; i < words.length;i++){
+        for(var keyword in words[i]){
+            var reg = new RegExp(keyword,"i");
+            if(reg.test(tweet.text)){
+                /**
+                * send the keyword and the tweet
+                **/
+                sendTrend(words[keyword],keyword,tweet);                
+            }
+        }        
+    }
+}
+ 
+ /**
+  *  Send Manager
+  * @objTrend  trend Object -> {keyword:[rooms]}
+  * @keyword  String 
+  * @tweet Tweet Object
+  * 
+  * */
+ function sendTrend(objTrend,keyword,tweet){
+     
+     }
+ 
+ 
  
 var buffer = [];
 
@@ -67,8 +118,5 @@ io.sockets.on('connection', function(client){
 
     client.on('disconnect', function(){
 	client.broadcast.to(Room).json.send({ msg: "Se desconecto"});
-    });
-    
+    });   
 });
-
-

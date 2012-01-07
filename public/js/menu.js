@@ -2,12 +2,9 @@
 //var ns = location.search.split('?ns=')[1];
 //alert(ns);
 //var socket = io.connect('http://upmobile.com.ar:8082');
-var socket = io.connect('http://tw.pepoviola.c9.io/');
+//var socket = io.connect('http://tw.pepoviola.c9.io/');
+var socket = io.connect('http://localhost:8000');
 
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
   
   socket.on('ns_to',function(ns){
       console.log(ns);
@@ -20,11 +17,10 @@ function post(){
 	//get the inputs
 	var inputs = $('input[type="text"]');
 	$.each(inputs,function(a,b){
-		if(b.value != ''){
+		if(b.value !== ''){
 			toTrack.push(b.value);
 			}
 		});
 	console.log(toTrack);
 	socket.emit('startStream',{to: toTrack});
-	//location.replace('/show?ns=pepo');
 }

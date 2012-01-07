@@ -121,57 +121,58 @@ setInterval(function() { wordGraph.update(); },1000);
 
 //var socket = new io.Socket('http://upmobile:3000');
 //socket.connect();
-var socket = io.connect('http://upmobile.com.ar:8082');
-
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
-
-//  socket.on('tweet',function(t){
-//	console.log(t);
-//	});
-
-//socket.on('connect', function(){
-    // do something when client connects
-//});
-
-socket.on('tweet', function(data,tw) { 
-    //alert('pepo');
-    //var words = data.text.split(" ");
-    var words = data.split(" ");   
-    var incLeft = Math.floor(WIDTH / words.length);
-    var incTop = 0;
-
-    for (var i=0; i<words.length; i++)
-    {
-	if(words[i]!=''){
-        var left = i * incLeft;
-        var top = i * incTop - 100;
-        //veo si esta
-        var toLeft = $('.'+words[i]).css('left');
-        if(toLeft !== undefined){
-        	left = parseInt(toLeft)+10;
-        	}
-        var div = $("<div></div>")
-            //.html(words[i])
-            .html('')
-            .addClass('word')
-            .css({left: left, top: top});
-
-        animationStack.pushElement(div);
-        wordGraph.pushWord(words[i]);
-
-        $("#wrapper").append(div);
-        if($("#tweet").children().length>=4){
-		var el = $("#tweet").children()[4];
-		$(el).remove();
-		$("#tweet").prepend(renderTweet(tw));
-		}
-	else{
-	        $("#tweet").prepend(renderTweet(tw));
-	}
-
-	}//del if 
-    }
-});
+//var socket = io.connect('http://upmobile.com.ar:8082');
+// var socket = io.connect('http://localhost:8000');
+// 
+//   socket.on('news', function (data) {
+//     console.log(data);
+//     socket.emit('my other event', { my: 'data' });
+//   });
+// 
+// //  socket.on('tweet',function(t){
+// //	console.log(t);
+// //	});
+// 
+// //socket.on('connect', function(){
+//     // do something when client connects
+// //});
+// 
+// socket.on('tweet', function(data,tw) { 
+//     //alert('pepo');
+//     //var words = data.text.split(" ");
+//     var words = data.split(" ");   
+//     var incLeft = Math.floor(WIDTH / words.length);
+//     var incTop = 0;
+// 
+//     for (var i=0; i<words.length; i++)
+//     {
+// 	if(words[i]!=''){
+//         var left = i * incLeft;
+//         var top = i * incTop - 100;
+//         //veo si esta
+//         var toLeft = $('.'+words[i]).css('left');
+//         if(toLeft !== undefined){
+//         	left = parseInt(toLeft)+10;
+//         	}
+//         var div = $("<div></div>")
+//             //.html(words[i])
+//             .html('')
+//             .addClass('word')
+//             .css({left: left, top: top});
+// 
+//         animationStack.pushElement(div);
+//         wordGraph.pushWord(words[i]);
+// 
+//         $("#wrapper").append(div);
+//         if($("#tweet").children().length>=4){
+// 		var el = $("#tweet").children()[4];
+// 		$(el).remove();
+// 		$("#tweet").prepend(renderTweet(tw));
+// 		}
+// 	else{
+// 	        $("#tweet").prepend(renderTweet(tw));
+// 	}
+// 
+// 	}//del if 
+//     }
+// });

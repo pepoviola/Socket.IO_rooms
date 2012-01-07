@@ -1,0 +1,22 @@
+%script{ src: '/js/main.js' }
+%script{ src: '/js/show.js' }
+:javascript
+  var div = $('<div>').attr({'id':'tweet'});
+  div.css({'float':'left'});
+  $('body').append(div);
+  var reset = $('<div>').attr({'id':'reset'});
+  reset.css({'float':'left'});
+  var b = $('<input>').attr({'type':'button','id':'resetButton', 'value': 'RESET'});
+  reset.append(b);
+  $('body').append(reset);
+  $(b).bind('click',function(e){resetStream()});
+%div{ id: "topWord0", class: "topWord" }
+%div{ id: "topWord1", class: "topWord" }
+%div{ id: "topWord2", class: "topWord" }
+%div{ id: "topWord3", class: "topWord" }
+%div{ id: "topWord4", class: "topWord" }
+%div{ id: "topWord5", class: "topWord" }
+%div{ id: "topWord6", class: "topWord" }
+%div{ id: "topWord7", class: "topWord" }
+%div{ id: "topWord8", class: "topWord" }
+%div{ id: "topWord9", class: "topWord" }
